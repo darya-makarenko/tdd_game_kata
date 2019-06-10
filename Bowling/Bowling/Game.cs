@@ -17,7 +17,13 @@ namespace Bowling
 
         public int Score()
         {
-            throw new NotImplementedException();
+            int score = 0;
+            for (int i = 0; i < rolls.Length; i++)
+            {
+                score += rolls[i];
+            }
+
+            return score;
         }
 
     }

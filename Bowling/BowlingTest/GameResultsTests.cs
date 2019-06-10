@@ -34,6 +34,30 @@ namespace BowlingTest
             Assert.Equal(score, 20 * pins);
         }
 
+        [Theory]
+        [MemberData(nameof(SparesTestData.TestData), MemberType = typeof(SparesTestData))]
+        public void OneSpareTest(int spareFrameNumber, int firstRoll, int secondRoll)
+        {
+            int score = 0;
+
+            for (int i = 0; i < 20; i++)
+            {
+                if (i / 2 == spareFrameNumber)
+                {
+                    game.Roll(firstRoll);
+                    game.Roll(secondRoll);
+                    i++;
+                }
+                else
+                {
+                    game.Roll(1);
+                }
+            }
+
+            score = game.Score();
+            Assert.Equal(score, 18 * 1 + 10 + 1);
+        }
+
         private void RollDefinedNumberOfPins(int times, int pins)
         {
             for (int i = 0; i < times; i++)
