@@ -4,7 +4,7 @@ using Xunit;
 
 namespace BowlingTest
 {
-    public class InitializationTests
+    public class InitializationTests: IDisposable
     {
         private Game game;
 
@@ -35,6 +35,11 @@ namespace BowlingTest
             var methodInfo = gameType.GetMethod("Score");
 
             Assert.NotNull(methodInfo);
+        }
+
+        public void Dispose()
+        {
+            game = null;
         }
     }
 }
