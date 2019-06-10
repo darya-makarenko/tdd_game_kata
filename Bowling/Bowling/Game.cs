@@ -12,7 +12,7 @@ namespace Bowling
         public void Roll(int pins)
         {
             rolls[currentRoll] = pins;
-            if (pins == 10)
+            if (pins == 10 && currentRoll != 18)
             {
                 rolls[currentRoll + 1] = 0;
                 currentRoll += 2;
@@ -34,7 +34,14 @@ namespace Bowling
 
                 if (rolls[firstIndex] == 10)
                 {
-                    score += 10 + rolls[secondIndex + 1] + rolls[secondIndex + 2];
+                    if (frame == 9)
+                    {
+                        score += 10 + rolls[secondIndex] + rolls[secondIndex + 1];
+                    }
+                    else
+                    {
+                        score += 10 + rolls[secondIndex + 1] + rolls[secondIndex + 2];
+                    }
                 }
                 else if (rolls[firstIndex] + rolls[secondIndex] == 10)
                 {
