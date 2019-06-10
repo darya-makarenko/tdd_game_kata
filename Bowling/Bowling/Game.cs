@@ -8,7 +8,7 @@ namespace Bowling
     {
         public void Roll(int pins)
         {
-
+            throw new NotImplementedException();
         }
 
         public int Score()
