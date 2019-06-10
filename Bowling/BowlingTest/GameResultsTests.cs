@@ -31,7 +31,7 @@ namespace BowlingTest
         {
             RollDefinedNumberOfPins(20, pins);
             int score = game.Score();
-            Assert.Equal(score, 20 * pins);
+            Assert.Equal(20 * pins, score);
         }
 
         [Theory]
@@ -40,23 +40,54 @@ namespace BowlingTest
         {
             int score = 0;
 
-            for (int i = 0; i < 20; i++)
+            int i = 0;
+            while (i < 20)
             {
-                if (i / 2 == spareFrameNumber)
+                if (i / 2 == spareFrameNumber - 1)
                 {
                     game.Roll(firstRoll);
                     game.Roll(secondRoll);
+                    i += 2;
+                }
+                else
+                {
+                    game.Roll(1);
+                    i++;
+                }
+            }
+
+            score = game.Score();
+            Assert.Equal(18 * 1 + 10 + 1, score);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(8)]
+        public void OneStrikeTest(int strikeFrameNumber)
+        {
+            int score = 0;
+
+            int i = 0;
+            while (i < 20)
+            {
+                if (i / 2 == strikeFrameNumber)
+                {
+                    game.Roll(10);
                     i++;
                 }
                 else
                 {
                     game.Roll(1);
                 }
+
+                i++;
             }
 
             score = game.Score();
-            Assert.Equal(score, 18 * 1 + 10 + 1);
+            Assert.Equal(18 * 1 + 10 + 2, score);
         }
+        
 
         private void RollDefinedNumberOfPins(int times, int pins)
         {
