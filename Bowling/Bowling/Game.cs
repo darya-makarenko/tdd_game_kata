@@ -6,9 +6,13 @@ namespace Bowling
 {
     public class Game
     {
+        private int[] rolls = new int[21]; //9 frames with 2 rolls, 1 frame with 3 rolls possible
+        private int currentRoll;
+
         public void Roll(int pins)
         {
-            throw new NotImplementedException();
+            rolls[currentRoll] = pins;
+            currentRoll++;
         }
 
         public int Score()
