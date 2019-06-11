@@ -11,6 +11,11 @@ namespace Bowling
 
         public void Roll(int pins)
         {
+            if (pins < 0 || pins > 10)
+            {
+                throw new ArgumentException();
+            }
+
             rolls[currentRoll] = pins;
             if (pins == 10 && currentRoll != 18)
             {
