@@ -25,6 +25,11 @@ namespace Bowling
 
         public int Score()
         {
+            if (currentRoll < 20)
+            {
+                throw  new NullReferenceException();
+            }
+
             int score = 0;
 
             for (int frame = 0; frame < 10; frame++)
