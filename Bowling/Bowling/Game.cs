@@ -16,7 +16,15 @@ namespace Bowling
                 throw new ArgumentException();
             }
 
+            //no more than 10 pins in one frame, except the last one
+            if ((currentRoll < 19) && (currentRoll % 2 == 1) && (rolls[currentRoll - 1] + pins > 10))
+            {
+                throw new ArgumentException();
+            }
+
             rolls[currentRoll] = pins;
+
+            //we don't skip second roll in frame if it's the last frame
             if (pins == 10 && currentRoll != 18)
             {
                 rolls[currentRoll + 1] = 0;
@@ -30,9 +38,16 @@ namespace Bowling
 
         public int Score()
         {
+            //it can't be less then 20 rolls
             if (currentRoll < 20)
             {
                 throw  new NullReferenceException();
+            }
+
+            //if there was a spare or a strike in 10th frame, we make 21st roll.
+            if (currentRoll == 20 && (rolls[currentRoll - 3] + rolls[currentRoll - 2] >= 10))
+            {
+                throw new NullReferenceException();
             }
 
             int score = 0;

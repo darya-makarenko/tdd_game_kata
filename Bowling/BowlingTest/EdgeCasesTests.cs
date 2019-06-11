@@ -65,6 +65,21 @@ namespace BowlingTest
             Assert.Throws<NullReferenceException>(act);
         }
 
+        [Theory]
+        [InlineData(1, 10)]
+        [InlineData(6, 8)]
+        [InlineData(5, 7)]
+        public void TooManyPinsInFrameNotAllowed(int firstRoll, int secondRoll)
+        {
+            Action act = () =>
+            {
+                game.Roll(firstRoll);
+                game.Roll(secondRoll);
+            };
+            Assert.Throws<ArgumentException>(act);
+        }
+
+
         public void Dispose()
         {
             game = null;
